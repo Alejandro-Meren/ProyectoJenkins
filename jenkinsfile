@@ -7,8 +7,8 @@ pipeline {
     }
 
     parameters{
-        string(name: 'Usuario', defaultValue: '', description: 'Nombre del ejecutor' )
-        string(name: 'Motivo', defaultValue: '', description: 'Motivo de la ejecucion' )
+        string(name: 'Usuario', defaultValue: '', description: 'Nombre del usuario' )
+        string(name: 'Razon', defaultValue: '', description: 'Razon de la ejecucion' )
         string(name: 'ChatID', defaultValue: '', description: 'ChatID de Telegram' )
     }
     stages { 
@@ -16,11 +16,11 @@ pipeline {
             steps { 
                 script { 
                     env.usuario = params.Usuario
-                    env.motivo = params.Motivo
+                    env.razon = params.Razon
                     env.chatID = params.ChatID
 
                     echo "Usuario: ${env.usuario}"
-                    echo "Motivo: ${env.motivo}"
+                    echo "Razon: ${env.razon}"
                     echo "ChatID: ${env.chatID}"
                 }
             } 
@@ -77,7 +77,7 @@ pipeline {
             steps {
                 script {
                     nodejs('Node') {
-                        sh "node jenkinsScripts/push_changes.js ${Ejecutor} ${Motivo}"
+                        sh "node jenkinsScripts/push_changes.js ${Usuario} ${Razon}"
                     }
                 }
             }
