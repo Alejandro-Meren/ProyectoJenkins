@@ -94,10 +94,10 @@ export function FormNewFilm({ generos, id, obtenerPeliculas, obtenerGeneros }: {
     };
 
     return (
-        <div className="gap-8 columns-3xl container mx-auto border border-slate-500 rounded-lg bg-slate-900">
-            <form className="grid grid-rows-2 grid-cols-2 gap-6 mb-0 m-4" onSubmit={handlePost}>
+        <div className="gap-8 columns-3xl container mx-auto border border-slate-500 rounded-lg bg-slate-800 p-6 shadow-lg">
+            <form className="grid grid-rows-2 grid-cols-2 gap-6 mb-0" onSubmit={handlePost}>
                 <div>
-                    <label htmlFor="name" className="block text-sm font-medium">Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
                     <div className="mt-1">
                         <input
                             type="text"
@@ -106,12 +106,12 @@ export function FormNewFilm({ generos, id, obtenerPeliculas, obtenerGeneros }: {
                             placeholder="Film Name"
                             value={peli ? peli.name : ""}
                             onChange={handleChange}
-                            className="border border-slate-500 bg-slate-700 p-2 rounded-md w-full"
+                            className="border border-slate-500 bg-slate-700 p-2 rounded-md w-full text-white"
                         />
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="year" className="block text-sm font-medium">Year</label>
+                    <label htmlFor="year" className="block text-sm font-medium text-white">Year</label>
                     <div className="mt-1">
                         <input
                             type="text"
@@ -120,12 +120,12 @@ export function FormNewFilm({ generos, id, obtenerPeliculas, obtenerGeneros }: {
                             placeholder="Year"
                             value={peli ? peli.year : ""}
                             onChange={handleChange}
-                            className="border border-slate-500 bg-slate-700 p-2 rounded-md w-full"
+                            className="border border-slate-500 bg-slate-700 p-2 rounded-md w-full text-white"
                         />
                     </div>
                 </div>
                 <div className="col-span-2">
-                    <label htmlFor="image" className="block text-sm font-medium">Film Poster</label>
+                    <label htmlFor="image" className="block text-sm font-medium text-white">Film Poster</label>
                     <div className="mt-1">
                         <input
                             type="text"
@@ -134,12 +134,12 @@ export function FormNewFilm({ generos, id, obtenerPeliculas, obtenerGeneros }: {
                             placeholder="Film Poster"
                             value={peli ? peli.image : ""}
                             onChange={handleChange}
-                            className="border border-slate-500 bg-slate-700 rounded-md w-full p-2"
+                            className="border border-slate-500 bg-slate-700 rounded-md w-full p-2 text-white"
                         />
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="genero" className="block text-sm font-medium">Genero</label>
+                    <label htmlFor="genero" className="block text-sm font-medium text-white">Genero</label>
                     <div className="flex mt-1">
                         <input
                             type="text"
@@ -148,19 +148,18 @@ export function FormNewFilm({ generos, id, obtenerPeliculas, obtenerGeneros }: {
                             placeholder="Genero"
                             value={genre.genero}
                             onChange={generoHandleChange}
-                            className="border border-slate-500 bg-slate-700 p-2 rounded-tl-md rounded-bl-md w-full"
+                            className="border border-slate-500 bg-slate-700 p-2 rounded-tl-md rounded-bl-md w-full text-white"
                         />
-                        <button className="pr-4 pt-1 pl-4 pb-1 rounded-tr-md rounded-br-md bg-blue-900 text-blue-200 content-center"
+                        <button className="pr-4 pt-1 pl-4 pb-1 rounded-tr-md rounded-br-md bg-blue-700 hover:bg-blue-800 text-white content-center"
                             type="button" onClick={handleGenrePost}> + </button>
                     </div>
                 </div>
-                <div className="flex mt-1">
+                <div className="flex mt-1 col-span-2">
                     <GridGeneros selected={selected} handleSelected={handleSelected} />
                 </div>
-                <div className="flex justify-center col-span-2 mb-5">
+                <div className="flex justify-center col-span-2 mt-4">
                     <CrearButton crear={crear} />
                 </div>
             </form>
         </div>
     );
-}
