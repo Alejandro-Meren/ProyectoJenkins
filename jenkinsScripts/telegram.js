@@ -17,10 +17,10 @@ console.log(`
     - Update_Readme_stage: ${UPDATE_README_RESULT} \n
     - Deploy_stage: ${DEPLOY_RESULT}`);
   
-  (LINTER_RESULT.toString() === '0') ? LINTER_RESULT = 'Linter se ha ejecutado correctamente - 💪' : LINTER_RESULT = 'Linter se ha ejecutado indebidamente - 👎';
-  (TEST_RESULT.toString() === '0') ? TEST_RESULT = 'Test se ha ejecutado correctamente - 💪' : TEST_RESULT = 'Test se ha ejecutado indebidamente - 👎';
-  (UPDATE_README_RESULT.toString() === '0') ? UPDATE_README_RESULT = 'Update_Readme se ha ejecutado correctamente - 💪' : UPDATE_README_RESULT = 'Update_readme se ha ejecutado indebidamente - 👎';
-  (DEPLOY_RESULT.toString() === '0') ? DEPLOY_RESULT = 'Deploy Vercel se ha ejecutado correctamente - 💪' : DEPLOY_RESULT = 'Deploy se ha ejecutado indebidamente - 👎';
+  (LINTER_RESULT.toString() === '0') ? LINTER_RESULT = ' El Linter se ha ejecutado correctamente - 💪' : LINTER_RESULT = ' El Linter se ha ejecutado indebidamente - 👎';
+  (TEST_RESULT.toString() === '0') ? TEST_RESULT = ' El Test se ha ejecutado correctamente - 💪' : TEST_RESULT = ' El Test se ha ejecutado indebidamente - 👎';
+  (UPDATE_README_RESULT.toString() === '0') ? UPDATE_README_RESULT = ' El Update_Readme se ha ejecutado correctamente - 💪' : UPDATE_README_RESULT = ' El Update_readme se ha ejecutado indebidamente - 👎';
+  (DEPLOY_RESULT.toString() === '0') ? DEPLOY_RESULT = ' El Deploy Vercel se ha ejecutado correctamente - 💪' : DEPLOY_RESULT = ' El Deploy se ha ejecutado indebidamente - 👎';
   
   const msg = `La pipeline ha sacado los siguientes resultados:  \n 
   - Linter: ${LINTER_RESULT} \n
