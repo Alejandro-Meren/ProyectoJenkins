@@ -19,17 +19,19 @@ export function GridGeneros({ selected, handleSelected }: { selected: number[]; 
     };
 
     return (
-        <ul className="flex flex-row ">
-            {genreEntries.map(genero => (
-                <Genre
-                    key={genero.id}
-                    id={genero.id}
-                    genre={genero.genre}
-                    handleEliminar={handleEliminar}
-                    selected={selected}
-                    handleSelected={handleSelected}
-                />
-            ))}
-        </ul>
+        <div className="container mx-auto p-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {genreEntries.map(genero => (
+                    <Genre
+                        key={genero.id}
+                        id={genero.id}
+                        genre={genero.genre}
+                        handleEliminar={handleEliminar}
+                        selected={selected}
+                        handleSelected={handleSelected}
+                    />
+                ))}
+            </ul>
+        </div>
     );
 }
