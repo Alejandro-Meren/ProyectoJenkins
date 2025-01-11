@@ -1,0 +1,116 @@
+pipeline { 
+    agent any 
+    environment{
+        github = credentials('Id_Github')
+        vercelToken = credentials('vercelToken')
+        vercelOrg = credentials('vercelOrg')
+        vercelProject = credentials('vercelProject')
+        botToken = credentials('botToken')
+    }
+
+    parameters{
+        string(name: 'Usuario', defaultValue: '', description: 'Nombre del ejecutor' )
+        string(name: 'Motivo', defaultValue: '', description: 'Motivo de la ejecucion' )
+        string(name: 'ChatID', defaultValue: '', description: 'ChatID de Telegram' )
+    }
+    stages { 
+        stage('Parametros') { 
+            steps { 
+                script { 
+                    env.usuario = params.Usuario
+                    env.motivo = params.Motivo
+                    env.chatID = params.ChatID
+
+                    echo "Usuario: ${env.usuario}"
+                    echo "Motivo: ${env.motivo}"
+                    echo "ChatID: ${env.chatID}"
+                }
+            } 
+        } 
+        stage('Linter') {
+            agent any
+            steps {
+                script {
+                    nodejs('Node') {
+                        sh 'npm install';
+
+                      env.RESULTADO_LINTER = sh(script: 'npm run lint', returnStatus: true);
+                    }                   
+                    
+                }
+            }
+        }
+        stage('Tests') {
+            agent any
+            steps {
+                script {
+                    nodejs('Node') {
+                    
+                       env.RESULTADO_TEST_JEST = sh(script: 'npm run test', returnStatus: true);
+
+                    }                   
+                    
+                }
+            }
+
+        }
+        stage('Build') {
+            agent any
+            steps{
+                script {
+                    nodejs('Node') {
+                        sh 'npm run build';
+                    }
+                }
+            }
+        }
+                stage('README_Update') {
+            agent any
+            steps {
+                script {
+                    nodejs('Node') {
+                        env.RESULTADO_UPDATE_README = sh(script: "node jenkinsScripts/update_readme.js ${env.RESULTADO_TEST_JEST}", returnStatus: true)
+                    }
+                }
+            }
+        }
+        stage('Push_Changes') {
+            agent any
+            steps {
+                script {
+                    nodejs('Node') {
+                        sh "node jenkinsScripts/push_changes.js ${Ejecutor} ${Motivo}"
+                    }
+                }
+            }
+        }
+
+        stage('Deploy Vercel') {
+            agent any
+            when {
+                expression { currentBuild.result == 'SUCCESS'|| currentBuild.result == null }
+            }
+            steps {
+                script {
+                    nodejs('Node') {
+                        sh 'npm i -g vercel'
+
+                        env.RESULTADO_DEPLOY = sh(script : 'node jenkinsScripts/deploy.js', returnStatus: true)
+                    }
+                }
+            }
+        }
+
+    } 
+    post {
+        always {
+            script {
+                nodejs('Node') {
+                sh 'npm install node-telegram-bot-api'
+                sh "node ./jenkinsScripts/telegram.js '${ChatID}' '${env.RESULTADO_LINTER}' '${env.RESULTADO_TEST_JEST}' '${env.RESULTADO_UPDATE_README}' '${env.RESULTADO_DEPLOY}'"
+            }
+        }
+    }
+}
+
+}
