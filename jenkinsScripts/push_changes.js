@@ -1,55 +1,45 @@
 import { exec } from 'child_process';
-import { argv, exit, env } from 'process';
+import process from 'process';
 
-const usuario = argv[2];
-const motivo = argv[3];
+const usuario = process.argv[2];
+const motivo = process.argv[3];
 
-const commitMessage = `Pipeline va a ser ejecutada por ${usuario}. El motivo es: ${motivo}`;
-
-const executeCommand = (command) => {
+function ejecutarComando(comando) {
     return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
+        exec(comando, (error, stdout, stderr) => {
             if (error) {
-                console.error(`Error al ejecutar el comando: ${command}`, error);
+                console.error(`Error al ejecutar el comando: ${comando} Error: ${error.message}`);
                 reject(error);
-            } else {
-                console.log(`El comando ha sido realizado correctamente: ${command}`);
-                console.log(stdout);
-                resolve({ stdout, stderr });
+                return;
             }
+            if (stderr) {
+                console.error(`Error al ejecutar el comando: ${comando} Stderr: ${stderr}`);
+                reject(stderr);
+                return;
+            }
+            console.log(`El comando ha sido realizado correctamente: ${comando}`);
+            resolve(stdout);
         });
     });
-};
+}
 
-const pushChanges = async () => {
-    const githubUser_Alejandro = env.github_token_USR || '';
-    const githubPassword_Alejandro = env.github_token_PSW || '';
-
-    const gitUsername_Alejandro = `Alejandro`;
-    const gitUserEmail_Alejandro = "alemeco2005@gmail.com";
+async function main() {
     try {
-        console.log('configurando git');
-        await executeCommand(`git config --global user.name "${gitUsername_Alejandro}"`);
-        await executeCommand(`git config --global user.email "${gitUserEmail_Alejandro}"`);
+        await ejecutarComando('git config --global user.name "Alejandro"');
+        await ejecutarComando('git config --global user.email "alemeco2005@gmail.com"');
+        await ejecutarComando('git add .');
 
-        await executeCommand('git add .');
-        const { stdout: statusBefore } = await executeCommand('git status');
-
-        if (!statusBefore.includes('Nada para hacer el commit')) {
-        await executeCommand(`git commit -m "${commitMessage}"`);
-
-        await executeCommand(`git remote remove origin`);
-        await executeCommand(`git remote add origin https://${githubUser_Alejandro}:${githubPassword_Alejandro}@github.com/N333kk/practicajenkins.git`);
-        await executeCommand(`git remote set-url origin https://${githubUser_Alejandro}:${githubPassword_Alejandro}@github.com/N333kk/practicajenkins.git`);
-        await executeCommand('git push origin HEAD:ci_jenkins');
-        console.log('Cambios subido correctamente.');
-        } else {
-        console.log('No hay cambios para subir.');
+        const status = await ejecutarComando('git status');
+        if (status.includes('nothing to commit, working tree clean')) {
+            console.log('No hay cambios para cometer.');
+            return;
         }
+
+        await ejecutarComando(`git commit -m "Pipeline va a ser ejecutada por ${usuario}. El motivo es: ${motivo}"`);
+        await ejecutarComando('git push origin ci_jenkins');
     } catch (error) {
         console.error('Error al subir los cambios', error);
-        exit(1);
     }
-};
+}
 
-pushChanges();
+main();
