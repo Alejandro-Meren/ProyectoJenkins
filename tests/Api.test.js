@@ -1,16 +1,11 @@
-import { eliminarPelicula, fetchPeliculas, fetchPelicula, postPelicula, fetchGeneros, eliminarGeneros, postGenero } from '../src/ApiEvents';
-import { describe, test, expect, beforeEach, jest } from '@jest/globals';
+import { fetchPelicula, postPelicula, fetchGeneros, eliminarGeneros, postGenero, eliminarPelicula } from '../src/ApiEvents';
 
-globalThis.fetch = jest.fn(() =>
-    Promise.resolve({
-        json: () => Promise.resolve({}),
-    })
-);
+jest.mock('node-fetch', () => jest.fn());
+
+const fetch = require('node-fetch');
 
 describe('ApiEvents', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-    });
+    const mockData = { id: 1, title: 'Pelicula 1' };
 
     test('eliminarPelicula should call fetch with DELETE method', async () => {
         fetch.mockImplementationOnce(() => Promise.resolve({}));
@@ -20,15 +15,13 @@ describe('ApiEvents', () => {
     });
 
     test('fetchPeliculas should call fetch and return data', async () => {
-        const mockData = [{ id: 1, name: 'Pelicula 1' }];
-        fetch.mockImplementationOnce(() => Promise.resolve({ json: () => Promise.resolve(mockData) }));
+        fetch.mockImplementationOnce(() => Promise.resolve({ json: () => Promise.resolve([mockData]) }));
         const data = await fetchPeliculas();
         expect(fetch).toHaveBeenCalledWith('https://hallowed-vintage-limpet.glitch.me/peliculas');
-        expect(data).toEqual(mockData);
+        expect(data).toEqual([mockData]);
     });
 
     test('fetchPelicula should call fetch with correct id and return data', async () => {
-        const mockData = { id: 1, name: 'Pelicula 1' };
         fetch.mockImplementationOnce(() => Promise.resolve({ json: () => Promise.resolve(mockData) }));
         const data = await fetchPelicula(1);
         expect(fetch).toHaveBeenCalledWith('https://hallowed-vintage-limpet.glitch.me/peliculas/1');
