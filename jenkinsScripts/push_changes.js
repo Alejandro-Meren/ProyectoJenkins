@@ -30,7 +30,7 @@ async function main() {
         await ejecutarComando('git add .');
 
         const status = await ejecutarComando('git status');
-        if (status.includes('Nada que confirmar, el árbol de trabajo está limpio')) {
+        if (status.includes('nothing to commit, working tree clean')) {
             console.log('No hay cambios para hacer.');
             return;
         }
