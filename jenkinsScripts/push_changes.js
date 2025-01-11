@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import process, { argv, exit } from 'process';
+import { argv, exit, env } from 'process';
 
 const usuario = argv[2];
 const motivo = argv[3];
@@ -22,8 +22,8 @@ const executeCommand = (command) => {
 };
 
 const pushChanges = async () => {
-    const githubUser_Alejandro = process.env.github_token_USR;
-    const githubPassword_Alejandro = process.env.github_token_PSW;
+    const githubUser_Alejandro = env.github_token_USR || '';
+    const githubPassword_Alejandro = env.github_token_PSW || '';
 
     const gitUsername_Alejandro = `Alejandro`;
     const gitUserEmail_Alejandro = "alemeco2005@gmail.com";
