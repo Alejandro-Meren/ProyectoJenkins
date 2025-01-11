@@ -1,7 +1,7 @@
 export async function eliminarPelicula(id:number){
 
     try {
-        await fetch(`https://halved-spotless-brush.glitch.me/peliculas/${id}`, { method: "DELETE" });
+        await fetch(`https://hallowed-vintage-limpet.glitch.me/peliculas${id}`, { method: "DELETE" });
         return true;
     } catch (error) {
         console.error("Error al eliminar la película:", error);
@@ -12,14 +12,14 @@ export async function eliminarPelicula(id:number){
 
 export async function fetchPeliculas(){
 
-    const response = await fetch('https://halved-spotless-brush.glitch.me/peliculas');
+    const response = await fetch('https://hallowed-vintage-limpet.glitch.me/peliculas');
         const data = await response.json();
         return data;
 }
 
 export async function fetchPelicula(id:number){
 
-    const response = await fetch(`https://halved-spotless-brush.glitch.me/peliculas/${id}`);
+    const response = await fetch(`https://hallowed-vintage-limpet.glitch.me/peliculas${id}`);
         const data = await response.json();
         return data;
 }
@@ -27,7 +27,7 @@ export async function fetchPelicula(id:number){
 export async function postPelicula( id?:number|null, name?:string, image?:string, year?:string|number, generos?:string[]){
     if(id){
         try {
-            await fetch(`https://halved-spotless-brush.glitch.me/peliculas/${id}`, {
+            await fetch(`https://hallowed-vintage-limpet.glitch.me/peliculas${id}`, {
                 method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export async function postPelicula( id?:number|null, name?:string, image?:string
     } else {
 
         try{
-        await fetch(`https://halved-spotless-brush.glitch.me/peliculas`, {
+        await fetch(`https://hallowed-vintage-limpet.glitch.me/peliculas`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export async function postPelicula( id?:number|null, name?:string, image?:string
 }
 export async function fetchGeneros(){
 
-    const response = await fetch('https://halved-spotless-brush.glitch.me/listaGeneros');
+    const response = await fetch('https://hallowed-vintage-limpet.glitch.me/listaDeGeneros');
         const data = await response.json();
         return data;
 }
@@ -78,7 +78,7 @@ export async function fetchGeneros(){
 export async function eliminarGeneros(id:number){
 
   try {
-    await fetch(`https://halved-spotless-brush.glitch.me/listaGeneros/${id}`, { method: "DELETE" });
+    await fetch(`https://hallowed-vintage-limpet.glitch.me/listaDeGeneros/${id}`, { method: "DELETE" });
     return true;
 } catch (error) {
     console.error("Error al eliminar la película:", error);
@@ -88,7 +88,7 @@ export async function eliminarGeneros(id:number){
 
 export async function postGenero(genre:string){
   try{
-    await fetch(`https://halved-spotless-brush.glitch.me/listaGeneros`, {
+    await fetch(`https://hallowed-vintage-limpet.glitch.me/listaDeGeneros`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
