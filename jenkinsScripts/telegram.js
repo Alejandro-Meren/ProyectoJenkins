@@ -2,14 +2,14 @@ import process from "process";
 import TelegramBot from 'node-telegram-bot-api';
 
 const chatID = process.argv[2];
-const botToken = process.env.botToken;
+const botTelegramToken = process.env.botTelegramToken;
 
 let LINTER_RESULT = process.argv[3].toString();
 let TEST_RESULT = process.argv[4].toString();
 let UPDATE_README_RESULT = process.argv[5]
 let DEPLOY_RESULT = process.argv[6]
 
-const bot = new TelegramBot(botToken, {polling: true});
+const bot = new TelegramBot(botTelegramToken, {polling: true});
 
 console.log(`
     - Linter_stage: ${LINTER_RESULT} \n

@@ -1,11 +1,9 @@
 pipeline { 
     agent any 
     environment{
-        github = credentials('Id_Github')
-        vercelToken = credentials('vercelToken')
-        vercelOrg = credentials('vercelOrg')
-        vercelProject = credentials('vercelProject')
-        botToken = credentials('botToken')
+        github_token = credentials('github_Id_Alejandro')
+        vercelToken = credentials('vercelToken_Alejandro')
+        botTelegramToken = credentials('botTelegramToken')
     }
 
     parameters{
