@@ -4,7 +4,7 @@ import process from 'node:process';
 async function main() {
     try {        
         const resultado_test = process.env.RESULTADO_TEST_JEST;
-        console.log('Resultado de los tests ->', resultado_test);
+        console.log('Los resultdos de los test son los siguientes: ', resultado_test);
         
         const img_error = 'https://img.shields.io/badge/test-failure-red';
         const img_exit = 'https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg';

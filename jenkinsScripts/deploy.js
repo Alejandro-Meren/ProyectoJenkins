@@ -5,14 +5,14 @@ const vercelToken = process.env.vercelToken;
 
 exec(`vercel --token ${vercelToken} --prod --yes --name proyectojenkins`, (error, stdout, stderr) => {
     if (error) {
-        console.error(`Error during deployment: ${error.message}`);
+        console.error(`Error durante el deploying: ${error.message}`);
         return;
     }
 
     if (stderr) {
-        console.error(`Deployment stderr: ${stderr}`);
+        console.error(`Deployment fallido: ${stderr}`);
         return;
     }
 
-    console.log(`Deployment stdout: ${stdout}`);
+    console.log(`Deployment correcto: ${stdout}`);
 });

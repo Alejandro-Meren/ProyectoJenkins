@@ -17,20 +17,20 @@ console.log(`
     - Update_Readme_stage: ${UPDATE_README_RESULT} \n
     - Deploy_stage: ${DEPLOY_RESULT}`);
   
-  (LINTER_RESULT.toString() === '0') ? LINTER_RESULT = 'Linter se ejecuto correctamente - ✅' : LINTER_RESULT = 'Linter fallo - ❌';
-  (TEST_RESULT.toString() === '0') ? TEST_RESULT = 'Test se ejecuto correctamente - ✅' : TEST_RESULT = 'Test fallo - ❌';
-  (UPDATE_README_RESULT.toString() === '0') ? UPDATE_README_RESULT = 'Update_Readme se ejecuto correctamente - ✅' : UPDATE_README_RESULT = 'Update_readme fallo - ❌';
-  (DEPLOY_RESULT.toString() === '0') ? DEPLOY_RESULT = 'Deploy Vercel se ejecuto correctamente - ✅' : DEPLOY_RESULT = 'Deploy ha fallado - ❌';
+  (LINTER_RESULT.toString() === '0') ? LINTER_RESULT = 'Linter se ha ejecutado correctamente - 💪' : LINTER_RESULT = 'Linter se ha ejecutado indebidamente - 👎';
+  (TEST_RESULT.toString() === '0') ? TEST_RESULT = 'Test se ha ejecutado correctamente - 💪' : TEST_RESULT = 'Test se ha ejecutado indebidamente - 👎';
+  (UPDATE_README_RESULT.toString() === '0') ? UPDATE_README_RESULT = 'Update_Readme se ha ejecutado correctamente - 💪' : UPDATE_README_RESULT = 'Update_readme se ha ejecutado indebidamente - 👎';
+  (DEPLOY_RESULT.toString() === '0') ? DEPLOY_RESULT = 'Deploy Vercel se ha ejecutado correctamente - 💪' : DEPLOY_RESULT = 'Deploy se ha ejecutado indebidamente - 👎';
   
-  const msg = `Se ejecuto la pipelino con los siguientes resultados: \n 
-  - Linter_stage: ${LINTER_RESULT} \n
-  - Tests_stage: ${TEST_RESULT} \n
-  - Update_Readme_stage: ${UPDATE_README_RESULT} \n
-  - Deploy_to_Vercel_stage: ${DEPLOY_RESULT}`;
+  const msg = `La pipeline ha sacado los siguientes resultados:  \n 
+  - Linter: ${LINTER_RESULT} \n
+  - Tests: ${TEST_RESULT} \n
+  - Update_Readme: ${UPDATE_README_RESULT} \n
+  - Deploy_to_Vercel: ${DEPLOY_RESULT}`;
   
   bot.sendMessage(chatID, msg)
     .then(() => {
-      console.log('Message sent');
+      console.log('Mensaje enviado');
       process.exit(0);
     })
     .catch((error) => {
