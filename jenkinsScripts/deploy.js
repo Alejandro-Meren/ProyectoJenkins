@@ -3,16 +3,16 @@ import process from 'process';
 
 const vercelToken = process.env.vercelToken;
 
-exec(`vercel --token ${vercelToken} --prod --yes`, (error, stdout, stderr) => {
+exec(`vercel --token ${vercelToken} --prod --yes --name proyectojenkins`, (error, stdout, stderr) => {
     if (error) {
-        console.error(`Error durante el despliegue: ${error.message}`);
+        console.error(`Error durante el deploying: ${error.message}`);
         return;
     }
 
     if (stderr) {
-        console.error(`Despliegue fallido: ${stderr}`);
+        console.error(`Deployment stderr: ${stderr}`);
         return;
     }
 
-    console.log(`Despliegue correcto: ${stdout}`);
+    console.log(`Deployment stdout: ${stdout}`);
 });
