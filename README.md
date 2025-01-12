@@ -28,7 +28,7 @@ Accedeix a Jenkins a través de "localhost:8080" si està configurat així en el
 ### Pas 2: Crear una nova tasca
 
 A la pantalla principal de Jenkins, selecciona "Nova Tasca" i assigna-li un nom. Tria "Pipeline" com a tipus de tasca.
-![alt text](image.png)
+![alt text](./img/image.png)
 
 ### Pas 3: Configuració de paràmetres
 
