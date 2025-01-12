@@ -1,4 +1,4 @@
-<!-- # PracticaJenkins
+# PracticaJenkins
 
 RESULTAT DELS ÚLTIMS TESTS 
 ![Test result badge](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)
@@ -126,4 +126,4 @@ Pas 14: Deploy to Vercel
 Desplega el projecte a Vercel utilitzant les credencials configurades.
 
 Pas 15: Notificació Telegram
-Utilitza un token de Telegram per enviar notificacions al bot amb el resultat de la pipeline. -->
+Utilitza un token de Telegram per enviar notificacions al bot amb el resultat de la pipeline.
