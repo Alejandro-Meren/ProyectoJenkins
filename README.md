@@ -20,6 +20,7 @@ Jenkins ajuda els desenvolupadors a detectar errors en etapes primerenques del c
 ### Pas 1: Accés a Jenkins
 
 Accedeix a Jenkins a través de "localhost:8080" si està configurat així en el teu "docker-compose.yml".
+![alt text](image.png)
 
 ### Pas 2: Crear una nova tasca
 
