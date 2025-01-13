@@ -77,7 +77,7 @@ pipeline {
             steps {
                 script {
                     nodejs('Node') {
-                        sh "node jenkinsScripts/push_changes.js ${Usuario} ${Razon}"
+                        sh "node jenkinsScripts/push_changes_Readme.js ${Usuario} ${Razon}"
                     }
                 }
             }
@@ -93,7 +93,7 @@ pipeline {
                     nodejs('Node') {
                         sh 'npm i -g vercel'
 
-                        env.RESULTADO_DEPLOY = sh(script : 'node jenkinsScripts/deploy.js', returnStatus: true)
+                        env.RESULTADO_DEPLOY = sh(script : 'node jenkinsScripts/deploy_to_Vercel.js', returnStatus: true)
                     }
                 }
             }
@@ -105,7 +105,7 @@ pipeline {
             script {
                 nodejs('Node') {
                 sh 'npm install node-telegram-bot-api'
-                sh "node ./jenkinsScripts/telegram.js '${ChatID}' '${env.RESULTADO_LINTER}' '${env.RESULTADO_TEST_JEST}' '${env.RESULTADO_UPDATE_README}' '${env.RESULTADO_DEPLOY}'"
+                sh "node ./jenkinsScripts/message_telegram.js '${ChatID}' '${env.RESULTADO_LINTER}' '${env.RESULTADO_TEST_JEST}' '${env.RESULTADO_UPDATE_README}' '${env.RESULTADO_DEPLOY}'"
             }
         }
     }
